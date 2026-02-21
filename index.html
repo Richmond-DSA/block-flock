@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block Flock — DSA Richmond</title>
+  <meta name="description" content="DSA Richmond's campaign against mass surveillance. Learn about Flock Safety's ALPR technology and why we oppose it.">
+
+  <!-- Fonts: Space Mono (headings) + matching sans-serif stack (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Tokens ── */
+    :root {
+      --lime: #d9ff61;
+      --lime-hover: #c8ee50;
+      --black: #000000;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+      --mono: 'Space Mono', 'Courier New', Courier, monospace;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --max-w: 720px;
+    }
+
+    /* ── Base ── */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--black);
+      padding: 0.55rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    nav::-webkit-scrollbar { display: none; }
+
+    nav .brand {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--lime);
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    nav a:not(.brand) {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    nav a:not(.brand):hover { color: var(--lime); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--lime);
+      padding: 3.5rem 2rem 3rem;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .hero img.logo {
+      width: 97px;
+      height: 97px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.5rem, 8vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      color: var(--black);
+    }
+
+    .hero .subtitle {
+      font-family: var(--sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 0.15rem;
+      color: var(--black);
+    }
+
+    .hero .tagline {
+      font-size: 1rem;
+      margin-top: 0.15rem;
+      color: var(--black);
+    }
+
+    .hero .date {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 2.75rem 2rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* Section headings — lime highlight, Space Mono */
+    section h2 {
+      font-family: var(--mono);
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 1rem;
+      padding: 0.15em 0.35em;
+      background: var(--lime);
+      color: var(--black);
+      display: inline-block;
+    }
+
+    section p {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 0.85rem;
+    }
+
+    /* ── Arrow Lists ── */
+    section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    section ul li {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    section ul li::before {
+      content: '\2794';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--black);
+    }
+
+    /* ── Summary box ── */
+    .summary-intro {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.4rem;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: var(--black);
+      color: var(--lime);
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+
+    .summary-cta:hover { background: #222; }
+
+    /* ── Claims / Debunking ── */
+    .claims-intro {
+      margin-bottom: 1.25rem;
+    }
+
+    .claim {
+      margin-bottom: 1.25rem;
+    }
+
+    .claim-label {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding: 0.1em 0.3em;
+      background: var(--lime);
+    }
+
+    .claim-body {
+      margin-top: 0.5rem;
+    }
+
+    .claim-body .truth-label {
+      font-weight: 700;
+    }
+
+    /* ── Concern link ── */
+    a.inline-link {
+      color: var(--black);
+      text-decoration: underline;
+      text-decoration-color: var(--lime);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+
+    a.inline-link:hover { background: var(--lime); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--lime);
+      text-decoration: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      nav { gap: 0.85rem; padding: 0.5rem 1rem; }
+      .hero { padding: 2.5rem 1.25rem 2rem; }
+      section { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="brand" href="#">BLOCK FLOCK</a>
+  <a href="#summary">Position</a>
+  <a href="#what-is-flock">What is Flock?</a>
+  <a href="#alprs">ALPRs</a>
+  <a href="#dangers">Dangers</a>
+  <a href="#data-security">Data Security</a>
+  <a href="#claims">RPD Claims</a>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-inner">
+    <img class="logo" src="images/image1.png" alt="DSA Richmond Logo">
+    <h1>BLOCK FLOCK</h1>
+    <div class="subtitle">DSA Richmond</div>
+    <div class="tagline">Campaign Position and Issue Explainer</div>
+    <span class="date">FEBRUARY 2026</span>
+  </div>
+</header>
+
+<!-- Summary -->
+<section id="summary">
+  <div class="container">
+    <h2>Summary of DSA Richmond Position</h2>
+    <p class="summary-intro">We oppose mass surveillance because of</p>
+    <ul>
+      <li>the serious and significant implications on our safety</li>
+      <li>the increasing abuse by law enforcement and government</li>
+      <li>the disparate impacts on minority communities</li>
+      <li>the potential this technology has to become another driver of mass incarceration</li>
+      <li>the growing costs of this new system on taxpayers</li>
+      <li>and the unavoidable access ALPRs provide to law enforcement, private parties, other states, and the federal government to an immense amount of highly sensitive data</li>
+    </ul>
+    <p>We are also increasingly concerned over the long-term intentions of the private companies who have solicited elected officials in our cities, counties, and Commonwealth to help build an expansive system of nationwide surveillance.</p>
+    <p>For more information, visit <a class="inline-link" href="https://linktr.ee/RDSA_Migrant_Solidarity" target="_blank" rel="noopener">https://linktr.ee/RDSA_Migrant_Solidarity</a>.</p>
+    <a class="summary-cta" href="https://linktr.ee/RDSA_Migrant_Solidarity" target="_blank" rel="noopener">Get Involved &rarr;</a>
+  </div>
+</section>
+
+<!-- What is Flock? -->
+<section id="what-is-flock">
+  <div class="container">
+    <h2>What is Flock?</h2>
+    <ul>
+      <li>Flock Safety is a $7.5 billion tech startup company, funded by Peter Thiel of Palantir and others, that markets automated license plate readers (ALPRs) and other mass surveillance technology to police departments, private businesses, and homeowners associations. The private company aims to create a seamless system of surveillance nationwide.</li>
+      <li>Flock and other private companies' surveillance apparatus is rapidly growing to encompass first responder drones, ALPRs for schools, biometrics, facial recognition technology, and AI-powered "predictive policing" tools.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ALPRs -->
+<section id="alprs">
+  <div class="container">
+    <h2>What are automatic license plate readers (ALPRs)?</h2>
+    <ul>
+      <li>ALPRs are high-speed AI-enabled cameras with image-processing software. They are operated by Virginia law-enforcement agencies to surveil and collect data on motorists and pinpoint their location. They can be mobile mounted or stationary.</li>
+      <li>The images or videos collected by ALPRs can capture the license plate, make, model, color, occupants, bumper stickers, other unique information, and the immediate vicinity.</li>
+      <li>ALPRs collect real time data on every traveler and store that information in a third party cloud database that may be maintained by individual government agencies. The data is pooled together into regional sharing systems or aggregated by private companies from a variety of sources and accessed via subscription or otherwise. The data can be stored indefinitely.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Dangers -->
+<section id="dangers">
+  <div class="container">
+    <h2>Dangers of Flock (and all ALPR devices)</h2>
+    <ul>
+      <li>ALPRs threaten privacy rights. They are a digital dragnet that captures information about millions of people who have committed no crimes.</li>
+      <li>ALPR abuse has been prevalent and well documented. ALPRs have been used to surveil people because of their political views, sexual orientation, and immigration status, intimate partners, women seeking reproductive healthcare, protesters, and Black and Brown people.</li>
+      <li>ALPR databases have been accessed by federal agencies, including ICE, DHS, ATF, CBP, and other out-of-state law enforcement and government agencies.</li>
+      <li>There are also countless documented incidents of ALPR errors: false positives, misreads, and other errors.</li>
+      <li>ALPRs surveil Black communities more intensely than white ones. A recent study of ALPRs in Hampton Roads shows that majority Black neighborhoods experience ALPR surveillance at 4 times their population share compared to majority White neighborhoods and the disparity rises to 7 times in highly segregated Black neighborhoods.</li>
+      <li>From February to June of 2025, RPD permitted ATF to use its ALPR database for immigration enforcement without permission.</li>
+      <li>In 2025, RPD used ALPRs to surveil protesters and activists during the No Kings rallies.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Data Security -->
+<section id="data-security">
+  <div class="container">
+    <h2>Data security concerns</h2>
+    <ul>
+      <li>Getting access to Flock Data is easy. When federal agents accessed Richmond's data, all the federal agents needed was a single law enforcement agent in the national network to agree to sharing their access.</li>
+      <li>Dozens of Flock "Condor" video cameras were left exposed to the open internet, allowing anyone to view live, unencrypted footage of public spaces—including playgrounds and shopping centers—without a password.</li>
+      <li>Millions of license plate records and police searches, intended to be private, were posted online after law enforcement agencies failed to properly redact data obtained via public records requests.</li>
+      <li>Hackers have targeted individual law enforcement officer logins (often lacking multi-factor authentication) to gain access to the Flock system.</li>
+      <li>Flock Safety is a for-profit company. We cannot trust surveillance tech companies who profit from data about us.</li>
+      <li>There is no meaningful accountability for ALPR abuse by law enforcement agencies. Law enforcement is effectively accountable to no one. They police themselves.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Debunking RPD Claims -->
+<section id="claims">
+  <div class="container">
+    <h2>Debunking RPD's Claims</h2>
+    <p class="claims-intro">Flock proponents (such as RPD) still insist that Flock is safe and effective. However, most of the RPD's claims are readily debunked.</p>
+
+    <!-- Claim 1 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 1: The General Assembly placed limits on Flock usage, which RPD supports (Virginia Code &sect; 2.2-5517).</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> The federal government is not constrained by Virginia's ALPR law. It provides no meaningful restrictions on the ability of the federal government, other states, and private parties to access ALPR data through subpoenas or search warrants.</li>
+        <li><span class="truth-label">Truth:</span> The federal government has been able to access ALPR data and abuse it for many years despite policies designed to prevent it.</li>
+        <li><span class="truth-label">Truth:</span> These laws are only as good as the willingness of RPD to abide by them, and RPD and Flock's willingness and ability to prevent outside access from a technical perspective.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 2 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 2: Flock has been essential to RPD solving homicides.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> RPD admits it has no empirical evidence supporting this claim; this is entirely anecdotal.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 3 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 3: RPD performs regular audits of Flock.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> The public cannot access these audits but once a year, and cannot independently verify that all usage is proper and legal.</li>
+        <li><span class="truth-label">Truth:</span> Because Flock data and searches are exempt from FOIA, there is no independent oversight of RPD usage.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 4 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 4: Access to Flock within RPD is limited.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> Limited to whom? And how is that limitation enforced? We already know they have provided access to a federal agency, and there is no independent oversight to prevent them from doing so again.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 5 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 5: Federal immigration enforcement cannot access data (which RPD describes as an on/off switch that is presently turned off), and RPD does not cooperate with ICE.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> RPD has already provided access to a federal agency; literally nothing can stop them from doing so again, and we would never know about it unless someone leaked it.</li>
+        <li><span class="truth-label">Truth:</span> Other local police departments (such as Chesterfield) regularly collaborate with ICE, and Richmond provides these police departments with access to its data.</li>
+        <li><span class="truth-label">Truth:</span> Police work in tandem with other agencies on joint task forces, at fusion centers, real time crime centers, and on violations of state law on federal properties. Data sharing is inevitable and encouraged.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 6 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 6: RPD will not use Flock to surveil protestors.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> RPD has already been caught doing so.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 7 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 7: Richmond City only has 99 cameras, with an equal number in the North and South side of Richmond.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> Volunteers have counted 103 cameras; the more cameras there are, the closer we come to a constant surveillance state.</li>
+        <li><span class="truth-label">Truth:</span> Through their participation in Flock, RPD can access other localities' data, and other localities can access RPD's data. One camera is too many when used indiscriminately.</li>
+      </ul>
+    </div>
+
+    <!-- Claim 8 -->
+    <div class="claim">
+      <span class="claim-label">RPD Claim 8: Other localities (such as Staunton and Charlottesville) who have cancelled Flock have "lower crime profiles" and therefore less need for cameras.</span>
+      <ul class="claim-body">
+        <li><span class="truth-label">Truth:</span> This is entirely speculative and not based on any empirical evidence. Moreover, these localities' decisions to cancel Flock contracts was not based on a lack of need, but due to concerns about Flock Safety as a company and based on the privacy concerns expressed by their citizens.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>DSA Richmond &middot; Block Flock Campaign &middot; 2026 &middot; <a href="https://linktr.ee/RDSA_Migrant_Solidarity" target="_blank" rel="noopener">linktr.ee/RDSA_Migrant_Solidarity</a></p>
+</footer>
+
+</body>
+</html>
